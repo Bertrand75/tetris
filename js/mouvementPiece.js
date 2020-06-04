@@ -1,10 +1,13 @@
-// translation vers le bas js
-// utiliser setInterval
+
+
 // rafraichissement tableau html
 // essayer de suivre la pièce uniquement
+// déplacement latéral dans une fourchette (largeur grille - largeur piece)
 
-setInterval(function(){
-    
-}, 1000);
+function mouvementAuto(){
+// translation vers le bas js (Y+1)
+}
+
+setInterval(mouvementAuto, 1000);
 
 

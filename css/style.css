@@ -97,7 +97,7 @@ h1 {
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 #tableau {
-	width:523px;
+	width:475px;
 	border:0.5rem solid white;
 	height:523px;
 	display: block;
@@ -105,8 +105,8 @@ h1 {
 }
 
 td {
-	width:64px;
-	height:64px;
+	width:47px;
+	height:47px;
 	background-color:black;
 	border:1px solid white;
 }
@@ -114,18 +114,18 @@ table {
 	margin:0 auto;
 }
 #score {
-	width:523px;
+	width:472px;
 	display: block;
 	margin: 0 auto 3rem auto;
 	height:100px;
 	color:black;
 	background-color:white;
-	font-size: 4rem;
+	font-size: 3rem;
 	text-align: center;
 	padding-top: 2rem;
 }
 #commande {
-	width:523px;
+	width:472px;
 	display: block;
 	margin: 0 auto;
 	text-align: center;
@@ -140,6 +140,8 @@ p {
 p:first-child, p:last-child {
 	cursor:pointer; 
 }
+
+
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FOOTER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */

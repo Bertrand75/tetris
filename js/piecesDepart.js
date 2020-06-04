@@ -1,13 +1,11 @@
-// Ajouter une pièce revient à ajouter les différents valeurs de ses parties au tableau (2 premières lignes non visibles ou plus par la suite)
-// en préservant sa structure
-// ses "coordonnées Y" baissent au fur et à mesure .
 
-// condition d'arrêt sur une autre pièce: une partie touche donc l'addition de la valeur de la partie concernée avec 
-// la valeur du dessous est > la valeur de la partie qui touche
 
-// ajout d'une piece de type carré 2*2
-function ajoutCarre(posX, tableauJS){
-    grille
+// création d'un carré au milieu haut de l'écran
+
+function creationCarre(largTab){
+    let posOrig = Math.round(largTab / 2);
+    let carre = [[posOrig, 0],[posOrig, 1],[posOrig+1, 0],[posOrig+1, 1]];
+    return carre;
 }
 
 // compléter avec d'autres pièces
@@ -16,14 +14,20 @@ function ajoutCarre(posX, tableauJS){
 // choix aléatoire d'une piece
 
 function randomPiece(){
-// random + switch
+    // random entre 0 et nb de pièces diférente
+    // switch
+    }
+
+    
+// Arrivée d'une pièce en haut de l'écran
+
+function ajoutPieceHaut(piece, tableauJS){
+    // on parcourt chaque composant de la pièce et on récupère ses coordonnées
+    for (let i=0; i<piece.length; i++){
+        let posX = piece[i][0];
+        let posY = piece[i][1];
+        //on mofifie les valeurs dans le tableau JS aux endroits concernés
+        tableauJS[posX][posY] = 1;            
+        }
 }
 
-
-
-// choix aléatoire d'une position de départ de piece;
-
-function randomPosition(Piece, largeurGrille){
-// a compléter random dans une fourchette (largeur grille - largeur piece)
-return posX;
-}

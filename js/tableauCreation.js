@@ -6,10 +6,11 @@ function createGrid(x,y) {
         if(i==0 || i==1 || i== y-1) {
             tr.hidden = true;
         }
-        for (let j=0; j<x;j++){
+        for (let j=0; j<x; j++){
             let td = document.createElement("td");
-            td.setAttribute('id', i+" "+j);
+            td.setAttribute('id', i+"_"+j);         
             tr.append(td);
+
         }
         tableau.append(tr);
     }
@@ -18,8 +19,8 @@ function createGrid(x,y) {
 function createArray(x,y) {
     let tableauJSX = [];
     let tableauJSY = [];
-    for(i=0;i<y;i++){
-        for(j=0;j<x;j++){
+    for(let i=0;i<y;i++){
+        for(let j=0;j<x;j++){
             tableauJSX.push(0);
         }
         tableauJSY.push(tableauJSX);
@@ -27,6 +28,25 @@ function createArray(x,y) {
     }
     return tableauJSY;
 }
+
+// récupération du tableau JS dans le tableau HTML
+
+function paintItWhite(tableauJSY) {
+    let td;
+    for (let i=0; i<tableauJSY.length; i++){
+        for (let j=0; j<tableauJSY[0].length; j++){
+            if (tableauJSY[i][j]!=0) {
+                td= getElementById(i+"_"+j);
+                td.style.backgroundColor= "white";
+            }
+        }
+    }
+}
+
+
+
+
+
 
 
 // on va essayer de faire le lien entre la grille html et la grille js

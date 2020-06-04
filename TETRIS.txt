@@ -1,19 +1,19 @@
 Creation d'un tableau de x sur y cases dans le dom
+div mieux que table peut être
 
-
-creation d'un tableau vide de x sur y dans js
+creation d'un tableau mirroir vide de x sur y dans js
 
 
 creation de piece random (3 ou 4 types)
 
 
-position d'une pièce random à une place random sur la première ligne du tableau
+position d'une pièce random au milieu sur la première ligne du tableau
 
 
 surveillance des touches droites et gauche associées à des fonctions pour aller à droite ou à gauche
 
 
-à chaque cycle de 1 seconde la position Y de la pièce dimininue 
+à chaque cycle de 1 seconde la position Y de la pièce augmente
 
 
 à chaque tour, calcul de la ligne du bas:
@@ -26,3 +26,18 @@ si un élément fixe est tout en haut, affichage message "perdu"
 Affichage du score : + 1
 
 lorsqu'on arrive à 10: message gagné
+
+
+
+https://github.com/Bertrand75/tetris
+
+
+création d'une fonction JS qui prend un tableau (ou largeur/hauteur) en paramètre et créé l'équivalent en html (avec un id)
+création .......... génère une pièce aléatoire et la renvoie
+event sur gauche/droite
+function tester les lignes une par une si pleine
+piece en cours :
+schema de la piece
+coordonnée X
+coordonnée Y
+avant le déplacement de la pièce, vider les couleurs a ses coordonnées puis bougez la piece et remettez les couleurs aux nouvelles coords
