@@ -1,0 +1,28 @@
+Creation d'un tableau de x sur y cases dans le dom
+
+
+creation d'un tableau vide de x sur y dans js
+
+
+creation de piece random (3 ou 4 types)
+
+
+position d'une pièce random à une place random sur la première ligne du tableau
+
+
+surveillance des touches droites et gauche associées à des fonctions pour aller à droite ou à gauche
+
+
+à chaque cycle de 1 seconde la position Y de la pièce dimininue 
+
+
+à chaque tour, calcul de la ligne du bas:
+si total indique complet, suppression ligne + on baisse y pour l'ensemble du tableau
+
+à chaque tour, calcul de la ligne du haut:
+si un élément fixe est tout en haut, affichage message "perdu"
+
+
+Affichage du score : + 1
+
+lorsqu'on arrive à 10: message gagné
