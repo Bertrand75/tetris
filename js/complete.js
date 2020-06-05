@@ -1,4 +1,10 @@
-// lorsque une ligne est complete (aucune case à 0) elle disparait et l'ensemble des cases au dessus descend; le score augmente
 
-// plusieurs cas particuliers à anticiper
+function verfifLigne(tableauJS, largTab){
+    // on calcule le total de chaque ligne horizontale
+
+    // si le total d'une ligne = largeur du tableau
+        // on supprime les éléments de la ligne
+        // l'ensemble du tableau au dessus descend d'une case
+        // les elements suspendues dans le vide descendent jusqu'en bas ???
+}
 
