@@ -22,14 +22,15 @@ function goRight(piece, tableauJS){
         if (tableauJS[posY][posX+1] == 1){
             ouiNonNonOui = false;
         }
-    }
+    };
     // si c'est le cas
     if (ouiNonNonOui){
         for (let j=0; j<piece.length; j++){
             // on incrémente x de 1 afin de déplacer la pièce vers la droite
             piece[j][0] += 1;
         }
-    }
+    };
+    paintItWhite(tableauJS,piece);
 }
 
 function goLeft(piece, tableauJS){
@@ -41,14 +42,15 @@ function goLeft(piece, tableauJS){
         if (tableauJS[posY][posX-1] == 1){
             ouiNonNonOui = false;
         }
-    }
+    };
     // si c'est le cas
     if (ouiNonNonOui){
         for (let j=0; j<piece.length; j++){
             // on décrémente x de 1 afin de déplacer la pièce vers la gauche
             piece[j][0] -= 1;
         }
-    }
+    };
+    paintItWhite(tableauJS,piece);
 }
 
 

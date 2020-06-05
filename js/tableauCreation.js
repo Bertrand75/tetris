@@ -17,16 +17,30 @@ function createGrid(x,y) {
 }
 // création d'un tableau js de X * Y permettant de suivre l'évolution de la grille
 function createArray(x,y) {
-    let tableauJSX = [];
+    // création tableau X (remarque: on y place déjà un "1" qui correspondra à la colonne de gauche)
+    let tableauJSX = [1];
+    // création tableau Y; il regroupera l'ensemble des tableaux/lignes X
     let tableauJSY = [];
-    for(let i=0;i<y;i++){
-        for(let j=0;j<x;j++){
+    // pour chaque ligne (sauf la dernière qui sera créée plus tard)
+    for(let i=0;i<y-1;i++){
+        // on remplit chaque "colonne" de la ligne de "0" (cases inoccupées) 
+        // remarque: j est < à x-2 pour laisser la place aux "1"(= cases occupées = les limites du cadre de jeu) que l'on a ajoutés et que l'on va ajouter
+        for(let j=0;j<x-2;j++){
             tableauJSX.push(0);
         }
+        // on ajoute une case occupée à la fin de la ligne
+        tableauJSX.push(1);
+        // quand la ligne est générée on l'ajoute à la suite (en dessous si l'on veut) des autres lignes
         tableauJSY.push(tableauJSX);
-        // vider le tableau X 
-        tableauJSX = [];
+        // on vide (presque) la ligne pour pouvoir générer la suivante 
+        tableauJSX = [1];
     }
+    // on remplit la dernière ligne de "1" pour indiquer la limite basse du cadre
+    for(let l=0; l<x-1; l++) {
+        tableauJSX.push(1);
+    }
+    // on ajoute la dernière ligne de "1" à la suite des autres
+    tableauJSY.push(tableauJSX);
     return tableauJSY;
 }
 
@@ -37,7 +51,7 @@ function paintItWhite(tableauJSY,piece) {
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
             if (tableauJSY[i][j]!=0) {
-                td= document.getElementById(j+"_"+i);
+                td = document.getElementById(i+"_"+j);
                 td.style.backgroundColor= "white";
             }
         }
@@ -45,7 +59,7 @@ function paintItWhite(tableauJSY,piece) {
     for (let z=0; z <piece.length; z++){
         posX = piece[z][0];
         posY = piece[z][1];
-        td = document.getElementById(posX+"_"+posY);
+        td = document.getElementById(posY+"_"+posX);
         td.style.backgroundColor= "white";
     }
 }

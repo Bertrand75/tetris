@@ -1,8 +1,14 @@
-createGrid(10,15);
 let tableau = createArray(10,15);
 let carre = creationCarre(10);
-ajoutPieceHaut(carre, tableau);
-console.log(tableau);
+let gauche= document.getElementById('gauche');
+let droite= document.getElementById('droite');
+
+createGrid(10,15);
 paintItWhite(tableau,carre);
+
+gauche.addEventListener('click', goLeft(carre,tableau));
+droite.addEventListener('click', goRight(carre,tableau));
+
+
 
 
