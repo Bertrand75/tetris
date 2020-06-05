@@ -1,5 +1,5 @@
 
-function verfifLigne(tableauJS, largTab){
+function verfifLigne(tableauJS){
     // on calcule le total de chaque ligne horizontale
 
     // si le total d'une ligne = largeur du tableau

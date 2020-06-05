@@ -3,7 +3,7 @@
 // création d'un carré au milieu haut de l'écran
 
 function creationCarre(largTab){
-    let posOrig = Math.round(largTab / 2);
+    let posOrig = Math.round(largTab/2 - 1);
     let carre = [[posOrig, 0],[posOrig, 1],[posOrig+1, 0],[posOrig+1, 1]];
     return carre;
 }

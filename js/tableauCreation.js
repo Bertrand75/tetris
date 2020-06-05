@@ -64,6 +64,14 @@ function paintItWhite(tableauJSY,piece) {
     }
 }
 
+function paintItBlack(piece) {
+    for (let z=0; z <piece.length; z++){
+        posX = piece[z][0];
+        posY = piece[z][1];
+        td = document.getElementById(posY+"_"+posX);
+        td.style.backgroundColor= "black";
+    }
+}
 
 
 
