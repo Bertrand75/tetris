@@ -41,3 +41,9 @@ schema de la piece
 coordonnée X
 coordonnée Y
 avant le déplacement de la pièce, vider les couleurs a ses coordonnées puis bougez la piece et remettez les couleurs aux nouvelles coords
+
+
+function getRandomInteger(min, max)
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

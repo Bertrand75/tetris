@@ -14,12 +14,15 @@ function creationCarre(largTab){
 // choix aléatoire d'une piece
 
 function randomPiece(){
-    // random entre 0 et nb de pièces diférente
+    // random entre 0 et nb de pièces diférentes
+
     // switch
+
     }
 
     
 // Arrivée d'une pièce en haut de l'écran
+// fonction inutile compte tenu de la nouvelle stratégie
 
 function ajoutPieceHaut(piece, tableauJS){
     // on parcourt chaque composant de la pièce et on récupère ses coordonnées

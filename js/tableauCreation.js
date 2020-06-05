@@ -24,6 +24,7 @@ function createArray(x,y) {
             tableauJSX.push(0);
         }
         tableauJSY.push(tableauJSX);
+        // vider le tableau X 
         tableauJSX = [];
     }
     return tableauJSY;
@@ -31,15 +32,21 @@ function createArray(x,y) {
 
 // récupération du tableau JS dans le tableau HTML
 
-function paintItWhite(tableauJSY) {
+function paintItWhite(tableauJSY,piece) {
     let td;
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
             if (tableauJSY[i][j]!=0) {
-                td= getElementById(i+"_"+j);
+                td= document.getElementById(j+"_"+i);
                 td.style.backgroundColor= "white";
             }
         }
+    }
+    for (let z=0; z <piece.length; z++){
+        posX = piece[z][0];
+        posY = piece[z][1];
+        td = document.getElementById(posX+"_"+posY);
+        td.style.backgroundColor= "white";
     }
 }
 

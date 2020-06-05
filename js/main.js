@@ -1,13 +1,8 @@
 createGrid(10,15);
 let tableau = createArray(10,15);
-
-
-let carre = [[0,0],[0,1],[1,0],[1,1]];
+let carre = creationCarre(10);
 ajoutPieceHaut(carre, tableau);
 console.log(tableau);
-
-function somme (x, y) {
-    x = x+y;
-}
+paintItWhite(tableau,carre);
 
 
