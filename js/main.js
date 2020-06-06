@@ -1,5 +1,5 @@
 let tableau = createArray(10,15);
-let piece = creationCarre(tableau);
+let piece = creationO(tableau);
 let gauche= document.getElementById('gauche');
 let droite= document.getElementById('droite');
 
