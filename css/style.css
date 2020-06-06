@@ -133,9 +133,7 @@ p {
 	display:inline-block;
 	text-align: center;
 	font-size: 10rem;
-	width:20%;
-}
-p:first-child, p:last-child {
+	width:30%;
 	cursor:pointer; 
 }
 

@@ -3,7 +3,7 @@ function createGrid(x,y) {
     let tableau = document.getElementById('tableau');
     for (let i=0; i<y; i++){
         let tr = document.createElement("tr");
-        if(i==0 || i==1 || i== y-1) {
+        if(i<=4 || i== y-1) {
             tr.hidden = true;
         }
         for (let j=0; j<x; j++){
@@ -46,13 +46,17 @@ function createArray(x,y) {
 
 // récupération du tableau JS dans le tableau HTML
 
-function paintItWhite(tableauJSY,piece) {
+function paintItWhite(tableauJSY,piece,couleur) {
     let td;
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
-            if (tableauJSY[i][j]!=0) {
+            if (tableauJSY[i][j]==1) {
                 td = document.getElementById(i+"_"+j);
                 td.style.backgroundColor= "white";
+            }
+            else if (tableauJSY[i][j]!=0) {
+                td = document.getElementById(i+"_"+j);
+                td.style.backgroundColor= tableauJSY[i][j];
             }
         }
     }
@@ -60,7 +64,7 @@ function paintItWhite(tableauJSY,piece) {
         posX = piece[z][0];
         posY = piece[z][1];
         td = document.getElementById(posY+"_"+posX);
-        td.style.backgroundColor= "white";
+        td.style.backgroundColor= couleur[0];
     }
 }
 
