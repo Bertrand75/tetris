@@ -1,24 +1,18 @@
 let tableau = createArray(10,15);
-let carre = creationCarre(10);
+let piece = creationCarre(tableau);
 let gauche= document.getElementById('gauche');
 let droite= document.getElementById('droite');
 
 createGrid(10,15);
-paintItWhite(tableau,carre);
+paintItWhite(tableau,piece);
 
 gauche.addEventListener('click', function(){
-    goLeft(tableau,carre);
+    goLeft(tableau,piece);
 });
-
 droite.addEventListener('click', function(){
-    goRight(tableau,carre);
+    goRight(tableau,piece);
 });
 
-mouvementAuto(tableau,carre);
-
-
-
-
-
+mouvementAuto(tableau,piece);
 
 

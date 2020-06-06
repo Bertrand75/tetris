@@ -5,14 +5,33 @@
 // déplacement latéral dans une fourchette (largeur grille - largeur piece)
 
 function mouvementAuto(tableauJS,piece){
-    setInterval(function(){
+    let interv = setInterval(function(){
         // on vérifie que les cases du tableau situées sous la pièce sont libres
         let ouiNonNonOui=true;
         for (let i=0; i<piece.length; i++){
             let posX = piece[i][0];
             let posY = piece[i][1];
+            // si elles sont occupées
             if (tableauJS[posY+1][posX] == 1){
+                // il ne continue pas vers le bas
                 ouiNonNonOui = false;
+                // on intègre la pièce au tableau JS
+                for (let n=0; n<piece.length;n++){
+                    let posX = piece[n][0];
+                    let posY = piece[n][1];
+                    tableauJS[posY][posX] = 1;        
+                }
+                // on relance le processus (on réorganisera plus tard tout le bazar; pour l'instant ça marche;) )
+                clearInterval(interv);
+                // function creationS ci dessous à remplacer par randomPiece par la suite
+                piece = creationS(tableauJS);
+                gauche.addEventListener('click', function(){
+                    goLeft(tableau,piece);
+                });
+                droite.addEventListener('click', function(){
+                    goRight(tableau,piece);
+                });
+                mouvementAuto(tableauJS,piece);
             };
         };
         // si c'est le cas

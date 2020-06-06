@@ -2,11 +2,56 @@
 
 // création d'un carré au milieu haut de l'écran
 
-function creationCarre(largTab){
+function creationO(tableau){
+    let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
-    let carre = [[posOrig, 0],[posOrig, 1],[posOrig+1, 0],[posOrig+1, 1]];
-    return carre;
+    let leO = [[posOrig, 0],[posOrig, 1],[posOrig+1, 0],[posOrig+1, 1]];
+    return leO;
 }
+
+function creationL(tableau){
+    let largTab = tableau[0].length;
+    let posOrig = Math.round(largTab/2 - 1);
+    let leL = [[posOrig, 0],[posOrig, 1],[posOrig, 2],[posOrig+1, 2]];
+    return leL;    
+}
+
+function creationJ(tableau){
+    let largTab = tableau[0].length;
+    let posOrig = Math.round(largTab/2 - 1);
+    let leJ = [[posOrig, 0],[posOrig, 1],[posOrig, 2],[posOrig-1, 2]];
+    return leJ;    
+}
+
+function creationI(tableau){
+    let largTab = tableau[0].length;
+    let posOrig = Math.round(largTab/2 - 1);
+    let leI = [[posOrig, 0],[posOrig, 1],[posOrig, 2],[posOrig, 3]];
+    return leI;    
+}
+
+function creationZ(tableau){
+    let largTab = tableau[0].length;
+    let posOrig = Math.round(largTab/2 - 1);
+    let leZ = [[posOrig, 0],[posOrig-1, 0],[posOrig, 1],[posOrig+1, 1]];
+    return leZ;    
+}
+
+function creationS(tableau){
+    let largTab = tableau[0].length;
+    let posOrig = Math.round(largTab/2 - 1);
+    let leS = [[posOrig, 0],[posOrig+1, 0],[posOrig, 1],[posOrig-1, 1]];
+    return leS;    
+}
+
+function creationT(tableau){
+    let largTab = tableau[0].length;
+    let posOrig = Math.round(largTab/2 - 1);
+    let leT = [[posOrig, 0],[posOrig-1, 0],[posOrig+1, 0],[posOrig, 1]];
+    return leT;    
+}
+
+
 
 // compléter avec d'autres pièces
 
