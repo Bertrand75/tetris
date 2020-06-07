@@ -65,12 +65,32 @@ function creationT(tableau,couleur){
 
 // choix aléatoire d'une piece
 
-function randomPiece(){
+function randomPiece(tableau,couleur,shape){
     // random entre 0 et nb de pièces diférentes
-
+	let r = Math.floor(Math.random() * 7);
     // switch
-
-    }
+	if (r==0){
+	    shape =	creationO(tableau,couleur);
+	}else if (r==1){
+	    shape =	creationL(tableau,couleur);
+	}
+	else if (r==2){
+	    shape =	creationJ(tableau,couleur);
+	}
+	else if (r==3){
+	    shape =	creationI(tableau,couleur);
+	}
+	else if (r==4){
+	    shape =	creationZ(tableau,couleur);
+	}
+	else if (r==5){
+	    shape =	creationS(tableau,couleur);
+	}
+	else if (r==6){
+	    shape =	creationT(tableau,couleur);
+	}
+	return shape;
+}
 
     
 // Arrivée d'une pièce en haut de l'écran

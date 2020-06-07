@@ -4,7 +4,7 @@
 // essayer de suivre la pièce uniquement
 // déplacement latéral dans une fourchette (largeur grille - largeur piece)
 
-function mouvementAuto(tableauJS,piece){
+function mouvementAuto(tableauJS,piece,couleur){
     console.log(couleur);
     let interv = setInterval(function(){
         // on vérifie que les cases du tableau situées sous la pièce sont libres
@@ -24,9 +24,8 @@ function mouvementAuto(tableauJS,piece){
                 }
                 // on relance le processus (on réorganisera plus tard tout le bazar; pour l'instant ça marche;) )
                 clearInterval(interv);
-                piece = [];
                 // function creationS ci dessous à remplacer par randomPiece par la suite
-                piece = creationS(tableauJS,couleur);
+                piece = randomPiece(tableauJS,couleur,shape);
                 gauche.addEventListener('click', function(){
                     goLeft(tableauJS,piece);
                 });
@@ -40,21 +39,21 @@ function mouvementAuto(tableauJS,piece){
                     event.preventDefault();
                     switch (event.key) {
                         case "ArrowDown":
-                            rotationD(tableau,piece);
+                            rotationD(tableauJS,piece);
                         break;
                         case "ArrowUp":
-                            rotationG(tableau,piece);
+                            rotationG(tableauJS,piece);
                         break;
                         case "ArrowLeft":
-                            goLeft(tableau,piece);
+                            goLeft(tableauJS,piece);
                         break;
                         case "ArrowRight":
-                            goRight(tableau,piece);
+                            goRight(tableauJS,piece);
                         break;
                     }
-                });                 
-                perdu(tableauJS);
-                mouvementAuto(tableauJS,piece);
+                });   
+                delLigne(tableauJS);              
+                mouvementAuto(tableauJS,piece,couleur);
             };
         };
         // si c'est le cas
@@ -124,7 +123,7 @@ function rotationD(tableauJS,piece){
         let yOrigin = piece[p][1] - centreRotY; 
         let xRot = - yOrigin;
         let yRot = xOrigin;
-        if (tableau[xRot + centreRotX][yRot + centreRotY]!=0){
+        if (tableauJS[xRot + centreRotX][yRot + centreRotY]!=0){
             ouiNonNonOui=false;
         }
     }

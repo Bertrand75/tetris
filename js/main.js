@@ -1,10 +1,11 @@
 let tableau = createArray(10,15);
 let couleur = [];
+let shape = [];
 let piece = creationT(tableau,couleur);
 let gauche= document.getElementById('gauche');
 let droite= document.getElementById('droite');
 let routourne= document.getElementById('routourne');
-let score = 0;
+let score = [0];
 createGrid(10,15);
 paintItWhite(tableau,piece,couleur);
 
@@ -35,7 +36,7 @@ window.addEventListener("keydown", function (event) {
         break;
     }
 }); 
-mouvementAuto(tableau,piece);
+mouvementAuto(tableau,piece,couleur);
 
 
 
