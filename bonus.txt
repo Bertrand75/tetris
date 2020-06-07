@@ -1,15 +1,8 @@
-Rotation
+
 
 Accéleration progressive
-
-Couleurs
-
 Niveaux de difficulté
-
 Effets sonores
-
 Effets visuels divers
-
 Boutton pause
-
-Affichage meilleur score
+Affichage meilleur score + nb de lignes

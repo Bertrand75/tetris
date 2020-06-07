@@ -129,6 +129,24 @@ td {
 	text-align: center;
 }
 
+#perdu {
+	position:absolute;
+	top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width:400px;
+	font-size: 3rem;
+	text-transform: uppercase;
+	text-align: center;
+	color: red;
+	background-color: black;
+	padding:2rem 1rem 1.5rem 1rem;
+	border:5px solid white;
+}
+.hidden {
+	display:none;
+}
+
 p {
 	display:inline-block;
 	text-align: center;

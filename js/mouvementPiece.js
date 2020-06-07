@@ -24,6 +24,7 @@ function mouvementAuto(tableauJS,piece){
                 }
                 // on relance le processus (on réorganisera plus tard tout le bazar; pour l'instant ça marche;) )
                 clearInterval(interv);
+                piece = [];
                 // function creationS ci dessous à remplacer par randomPiece par la suite
                 piece = creationS(tableauJS,couleur);
                 gauche.addEventListener('click', function(){
@@ -33,8 +34,26 @@ function mouvementAuto(tableauJS,piece){
                     goRight(tableauJS,piece);
                 });
                 routourne.addEventListener('click', function(){
-                    rotation(tableauJS,piece);
+                    rotationD(tableauJS,piece);
                 });
+                window.addEventListener("keydown", function (event) {
+                    event.preventDefault();
+                    switch (event.key) {
+                        case "ArrowDown":
+                            rotationD(tableau,piece);
+                        break;
+                        case "ArrowUp":
+                            rotationG(tableau,piece);
+                        break;
+                        case "ArrowLeft":
+                            goLeft(tableau,piece);
+                        break;
+                        case "ArrowRight":
+                            goRight(tableau,piece);
+                        break;
+                    }
+                });                 
+                perdu(tableauJS);
                 mouvementAuto(tableauJS,piece);
             };
         };
@@ -93,27 +112,62 @@ function goLeft(tableauJS,piece){
     paintItWhite(tableauJS,piece,couleur);
 }
 
-function rotation(tableauJS,piece){
+
+
+function rotationD(tableauJS,piece){
     // on vérifie que les cases occupées potentiellement par la pièce après une rotation (éventuelle) sont disponibles dans le tableau
     let ouiNonNonOui=true;
     let centreRotX = piece[0][0];
     let centreRotY = piece[0][1];
     for (let p=0; p<piece.length;p++){
-        let caseX = piece[p][1] - centreRotY + centreRotX;
-        let caseY = piece[p][0] + centreRotY - centreRotX ;
-        if (tableau[caseY][caseX]!=0){
+        let xOrigin = piece[p][0] - centreRotX;
+        let yOrigin = piece[p][1] - centreRotY; 
+        let xRot = - yOrigin;
+        let yRot = xOrigin;
+        if (tableau[xRot + centreRotX][yRot + centreRotY]!=0){
             ouiNonNonOui=false;
         }
     }
-    // si c'est le cas
+    // si c'est le cas on effectue la rotation
     if (ouiNonNonOui==true){
         paintItBlack(piece);
         for (let p=0; p<piece.length;p++){
-            let memoriserX = piece[p][0];
-            piece[p][0] = piece[p][1] - centreRotY + centreRotX;
-            piece[p][1] = memoriserX + centreRotY - centreRotX ;
+            let xOrigin = piece[p][0] - centreRotX;
+            let yOrigin = piece[p][1] - centreRotY; 
+            let xRot = - yOrigin;
+            let yRot = xOrigin;
+            piece[p][0] = xRot + centreRotX;
+            piece[p][1] = yRot + centreRotY;
         }
         paintItWhite(tableauJS,piece,couleur);
     }
 }
 
+function rotationG(tableauJS,piece){
+    // on vérifie que les cases occupées potentiellement par la pièce après une rotation (éventuelle) sont disponibles dans le tableau
+    let ouiNonNonOui=true;
+    let centreRotX = piece[0][0];
+    let centreRotY = piece[0][1];
+    for (let p=0; p<piece.length;p++){
+        let xOrigin = piece[p][0] - centreRotX;
+        let yOrigin = piece[p][1] - centreRotY; 
+        let xRot = yOrigin;
+        let yRot = - xOrigin;
+        if (tableau[xRot + centreRotX][yRot + centreRotY]!=0){
+            ouiNonNonOui=false;
+        }
+    }
+    // si c'est le cas on effectue la rotation
+    if (ouiNonNonOui==true){
+        paintItBlack(piece);
+        for (let p=0; p<piece.length;p++){
+            let xOrigin = piece[p][0] - centreRotX;
+            let yOrigin = piece[p][1] - centreRotY; 
+            let xRot = yOrigin;
+            let yRot = - xOrigin;
+            piece[p][0] = xRot + centreRotX;
+            piece[p][1] = yRot + centreRotY;
+        }
+        paintItWhite(tableauJS,piece,couleur);
+    }
+}
