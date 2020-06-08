@@ -40,13 +40,14 @@ function createArray(x,y) {
         tableauJSX.push(1);
     }
     // on ajoute la dernière ligne de "1" à la suite des autres
-    tableauJSY.push(tableauJSX);
+    tableauJSY.push(tableauJSX); 
     return tableauJSY;
+
 }
 
-// récupération du tableau JS dans le tableau HTML
+// affichage du tableau JS et de la pièce dans le tableau HTML
 
-function paintItWhite(tableauJSY,piece,couleur) {
+function paintItWhite(tableauJSY,piece) {
     let td;
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
@@ -63,11 +64,12 @@ function paintItWhite(tableauJSY,piece,couleur) {
     for (let z=0; z <piece.length; z++){
         posX = piece[z][0];
         posY = piece[z][1];
-        td = document.getElementById(posY+"_"+posX);
+        td = document.getElementById((posY)+"_"+posX);
         td.style.backgroundColor= couleur[0];
     }
 }
 
+// effacement de la piece à l'écran
 function paintItBlack(piece) {
     for (let z=0; z <piece.length; z++){
         posX = piece[z][0];
@@ -76,22 +78,3 @@ function paintItBlack(piece) {
         td.style.backgroundColor= "black";
     }
 }
-
-
-
-
-
-
-// on va essayer de faire le lien entre la grille html et la grille js
-// lorsque les valeurs de la grille seront différentes de 0 (dans js) elle s'afficheront d'une couleur particulière (html) pour marquer leur présence
-// la valeur des cases occupées oscillera entre 1 et h (h=hauteur max de la pièce) et décroira (-1) lorsque la pièce descendra
-// ex:
-// 1 1 1
-// 2 2 2
-//
-// 1
-// 2
-// 3 1 1
-//   2
-//
-// de façon à ne pas repasser prématurement à 0 "inoccupé" lorsqu'elles descendront

@@ -1,95 +1,93 @@
 
+// création d'une piece au milieu haut de l'écran
 
-// création d'un carré au milieu haut de l'écran
-
-function creationO(tableau,couleur){
+function creationO(tableau){
+    couleur[0] = 'green';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leO = [[posOrig, 0],[posOrig, 1],[posOrig+1, 0],[posOrig+1, 1]];
-    couleur[0] = 'green';
     return leO;
 }
 
-function creationL(tableau,couleur){
+function creationL(tableau){
+    couleur[0] = 'blue';
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leL = [[posOrig, 1],[posOrig, 0],[posOrig, 2],[posOrig+1, 2]];
-    couleur[0] = 'blue';
     return leL;    
 }
 
-function creationJ(tableau,couleur){
+function creationJ(tableau){
+    couleur[0] = 'yellow';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
-    let leJ = [[posOrig, 3],[posOrig, 2],[posOrig, 4],[posOrig-1, 4]];
-    couleur[0] = 'yellow';
+    let leJ = [[posOrig, 1],[posOrig, 0],[posOrig, 2],[posOrig-1, 2]];
     return leJ;    
 }
 
-function creationI(tableau,couleur){
+function creationI(tableau){
+    couleur[0] = 'cyan';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
-    let leI = [[posOrig, 4],[posOrig, 2],[posOrig, 3],[posOrig, 5],[posOrig, 6]];
-    couleur[0] = 'cyan';
+    let leI = [[posOrig, 2],[posOrig, 0],[posOrig, 1],[posOrig, 3]];
     return leI;    
 }
 
-function creationZ(tableau,couleur){
+function creationZ(tableau){
+    couleur[0] = 'gold';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
-    let leZ = [[posOrig, 2],[posOrig-1, 2],[posOrig, 3],[posOrig+1, 3]];
-    couleur[0] = 'gold';
+    let leZ = [[posOrig, 0],[posOrig-1, 0],[posOrig, 1],[posOrig+1, 1]];
     return leZ;    
 }
 
-function creationS(tableau,couleur){
+function creationS(tableau){
+    couleur[0] = 'violet';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
-    let leS = [[posOrig, 2],[posOrig+1, 2],[posOrig, 3],[posOrig-1, 3]];
-    couleur[0] = 'violet';
+    let leS = [[posOrig, 0],[posOrig+1, 0],[posOrig, 1],[posOrig-1, 1]];
     return leS;    
 }
 
-function creationT(tableau,couleur){
+function creationT(tableau){
+    couleur[0] = 'cornsilk';
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
-    let leT = [[posOrig, 2],[posOrig-1, 2],[posOrig+1, 2],[posOrig, 3]];
-    couleur[0] = 'cornsilk';
+    let leT = [[posOrig, 0],[posOrig-1, 0],[posOrig+1, 0],[posOrig, 1]];
     return leT;
 }
 
 
-
-// compléter avec d'autres pièces
-
-
 // choix aléatoire d'une piece
 
-function randomPiece(tableau,couleur,shape){
+function randomPiece(tableau){
     // random entre 0 et nb de pièces diférentes
-	let r = Math.floor(Math.random() * 7);
+    let r = Math.floor(Math.random() * 6);
     // switch
-	if (r==0){
-	    shape =	creationO(tableau,couleur);
-	}else if (r==1){
-	    shape =	creationL(tableau,couleur);
-	}
-	else if (r==2){
-	    shape =	creationJ(tableau,couleur);
-	}
-	else if (r==3){
-	    shape =	creationI(tableau,couleur);
-	}
-	else if (r==4){
-	    shape =	creationZ(tableau,couleur);
-	}
-	else if (r==5){
-	    shape =	creationS(tableau,couleur);
-	}
-	else if (r==6){
-	    shape =	creationT(tableau,couleur);
-	}
-	return shape;
+    switch(r){
+        case 0:
+            piece =	creationO(tableau);
+            break;
+        case 1:
+            piece =	creationL(tableau);
+            break;
+        case 2:
+            piece =	creationJ(tableau);
+            break;
+        case 3:
+            piece =	creationI(tableau);
+            break;
+        case 4:
+            piece =	creationZ(tableau);
+            break;
+        case 5:
+            piece =	creationS(tableau);
+            break;
+        case 6:
+            piece =	creationT(tableau);
+            break;
+}
+	return piece;
 }
 
     

@@ -105,10 +105,9 @@ tr {
 	display:block;
 }
 td {
-	width:35px;
-	height:35px;
+	width:30px;
+	height:30px;
 	background-color:black;
-	border:1px solid white;
 }
 
 #score {
@@ -149,6 +148,7 @@ td {
 
 p {
 	display:inline-block;
+	user-select:none;
 	text-align: center;
 	font-size: 10rem;
 	width:30%;

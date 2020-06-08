@@ -1,74 +1,3 @@
-
-
-// rafraichissement tableau html
-// essayer de suivre la pièce uniquement
-// déplacement latéral dans une fourchette (largeur grille - largeur piece)
-
-function mouvementAuto(tableauJS,piece,couleur){
-    console.log(couleur);
-    let interv = setInterval(function(){
-        // on vérifie que les cases du tableau situées sous la pièce sont libres
-        let ouiNonNonOui=true;
-        for (let i=0; i<piece.length; i++){
-            let posX = piece[i][0];
-            let posY = piece[i][1];
-            // si elles sont occupées
-            if (tableauJS[posY+1][posX] != 0){
-                // il ne continue pas vers le bas
-                ouiNonNonOui = false;
-                // on intègre la pièce au tableau JS
-                for (let n=0; n<piece.length;n++){
-                    let posX = piece[n][0];
-                    let posY = piece[n][1];
-                    tableauJS[posY][posX] = couleur[0];        
-                }
-                // on relance le processus (on réorganisera plus tard tout le bazar; pour l'instant ça marche;) )
-                clearInterval(interv);
-                // function creationS ci dessous à remplacer par randomPiece par la suite
-                piece = randomPiece(tableauJS,couleur,shape);
-                gauche.addEventListener('click', function(){
-                    goLeft(tableauJS,piece);
-                });
-                droite.addEventListener('click', function(){
-                    goRight(tableauJS,piece);
-                });
-                routourne.addEventListener('click', function(){
-                    rotationD(tableauJS,piece);
-                });
-                window.addEventListener("keydown", function (event) {
-                    event.preventDefault();
-                    switch (event.key) {
-                        case "ArrowDown":
-                            rotationD(tableauJS,piece);
-                        break;
-                        case "ArrowUp":
-                            rotationG(tableauJS,piece);
-                        break;
-                        case "ArrowLeft":
-                            goLeft(tableauJS,piece);
-                        break;
-                        case "ArrowRight":
-                            goRight(tableauJS,piece);
-                        break;
-                    }
-                });   
-                delLigne(tableauJS);              
-                mouvementAuto(tableauJS,piece,couleur);
-            };
-        };
-        // si c'est le cas
-        if (ouiNonNonOui==true){
-            paintItBlack(piece);
-            for (let j=0; j<piece.length; j++){
-                // on incrémente x de 1 afin de déplacer la pièce vers la droite
-                piece[j][1] += 1;
-            };
-        };
-        paintItWhite(tableauJS,piece,couleur);
-    },1000);
-}
-
-
 function goRight(tableauJS,piece){
     // on vérifie que les cases du tableau situées à droite de la pièce sont libres
     let ouiNonNonOui=true;
@@ -87,7 +16,7 @@ function goRight(tableauJS,piece){
             piece[j][0] += 1;
         };
     };
-    paintItWhite(tableauJS,piece,couleur);
+    paintItWhite(tableauJS,piece);
 }
 
 function goLeft(tableauJS,piece){
@@ -108,9 +37,8 @@ function goLeft(tableauJS,piece){
             piece[j][0] -= 1;
         }
     };
-    paintItWhite(tableauJS,piece,couleur);
+    paintItWhite(tableauJS,piece);
 }
-
 
 
 function rotationD(tableauJS,piece){
@@ -138,7 +66,7 @@ function rotationD(tableauJS,piece){
             piece[p][0] = xRot + centreRotX;
             piece[p][1] = yRot + centreRotY;
         }
-        paintItWhite(tableauJS,piece,couleur);
+        paintItWhite(tableauJS,piece);
     }
 }
 
@@ -152,7 +80,7 @@ function rotationG(tableauJS,piece){
         let yOrigin = piece[p][1] - centreRotY; 
         let xRot = yOrigin;
         let yRot = - xOrigin;
-        if (tableau[xRot + centreRotX][yRot + centreRotY]!=0){
+        if (tableauJS[xRot + centreRotX][yRot + centreRotY]!=0){
             ouiNonNonOui=false;
         }
     }
@@ -167,6 +95,38 @@ function rotationG(tableauJS,piece){
             piece[p][0] = xRot + centreRotX;
             piece[p][1] = yRot + centreRotY;
         }
-        paintItWhite(tableauJS,piece,couleur);
+        paintItWhite(tableauJS,piece);
     }
+}
+
+
+// verification que la place est libre pour descendre
+
+function verifDessous(tableau, piece){
+  // on regarde la position que les composants de la pièce occupe
+    let libre = true;
+    for (let i=0; i<piece.length; i++){
+        let posX = piece[i][0];
+        let posY = piece[i][1];
+        // si les places du dessous sont occupées dans le tableau
+        if (tableau[posY+1][posX] != 0){
+            // la piece n'est pas libre de se déplacer
+            libre = false;
+        }
+    }
+    return libre;
+}
+
+
+// déplacement de la pièce d'un cran vers le bas
+
+function unCranBas(tableau,piece){
+    // on enlève la pièce de l'affichage
+    paintItBlack(piece);
+    // on incrémente y de 1 afin de déplacer la pièce en dessous
+    for (let i=0; i<piece.length; i++){        
+        piece[i][1] += 1;
+    };
+    // on reaffiche la pièce à la bonne position
+    paintItWhite(tableau,piece);
 }
