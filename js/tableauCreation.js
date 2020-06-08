@@ -48,12 +48,11 @@ function createArray(x,y) {
 // creé une ligne vierge prete à etre insérée dans le tableau lorsqu'une ligne est effacée
 
 function lignVierg(tableau){
-    let lign = [1];
+    let lign = [[1]];
      for (let m = 1; m<(tableau[0].length-1); m++){
-        lign.push(0);
+        lign[0].push(0);
     }
-    lign.push(1);
-    console.log(lign);
+    lign[0].push(1);
     return lign;
 }
 
@@ -63,14 +62,16 @@ function paintItWhite(tableauJSY,piece) {
     let td;
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
-            if (tableauJSY[i][j]==1) {
-                td = document.getElementById(i+"_"+j);
+            td = document.getElementById(i+"_"+j);
+            if (tableauJSY[i][j]==1) {;
                 td.style.backgroundColor= "white";
             }
-            else if (tableauJSY[i][j]!=0) {
-                td = document.getElementById(i+"_"+j);
+            else if(tableauJSY[i][j]!=0) {
                 td.style.backgroundColor= tableauJSY[i][j];
             }
+            else if(tableauJSY[i][j]==0) {
+                td.style.backgroundColor= "black";
+            }       
         }
     }
     for (let z=0; z <piece.length; z++){

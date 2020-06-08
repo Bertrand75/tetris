@@ -23,13 +23,15 @@ function delLigne(tableau){
                 // c'est que la ligne est incomplete
                 nb2zero += 1;
             }
-            if(nb2zero == 0){
-                // on supprime la ligne
-                tableau.splice(l);
-                // on rajoute une ligne en haut
-                tableau.push(emptyLine);
-            }     
-        }   
+        }
+        if(nb2zero == 0){
+            // on supprime la ligne
+            console.log(tableau[l]);
+            tableau.splice(l,1);
+            // on rajoute une ligne en haut
+            tableau.unshift(emptyLine[0]);
+            console.log(tableau);
+        }       
     }
     return tableau;
 }
@@ -42,7 +44,7 @@ function affichScore(score){
 }
 
 
-// Partie Gilles
+// Partie Gilles (à compléter)
 function deleteLine1( tableauJS){
     let ymin = 2; // 1ere ligne visible du joueur
     let ymax = tableauJS.length - 2;  // derniere ligne visible du joueur

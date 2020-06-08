@@ -3,16 +3,18 @@ let couleur = ['white'];
 let score = [0];
 let stopper = [0]; // utile pour le perdu
 
+
  
 
 // fonction qui gère le déplacement auto
 
 function principale(tableau,piece){  
     // on vérifie que les cases du tableau situées sous la pièce sont libres
+
     let descendre = verifDessous(tableau, piece);
     if (descendre==true){
-        setTimeout(function(){unCranBas(tableau,piece);}, 1000);
-        setTimeout(function(){principale(tableau,piece);}, 1000);
+        setTimeout(function(){unCranBas(tableau,piece);}, 500);
+        setTimeout(function(){principale(tableau,piece);}, 500);
         }
     // si elle est bloquée, on intègre la pièce au tableau JS dans sa position actuelle
     else{
@@ -21,13 +23,13 @@ function principale(tableau,piece){
             let posY = piece[n][1];
             tableau[posY][posX] = couleur[0]; // la couleur[0] est le tableau dans lequel est stockée la couleur de la pièce en cours       
         }
-        paintItWhite(tableau, piece);
-        piece = randomPiece(tableau);    
-        perdu(tableau);
+        paintItWhite(tableau,piece); 
+        piece = randomPiece(tableau);   
+        tableau = delLigne(tableau); 
+        perdu(tableau);       
         if(stopper==0){
             principale(tableau,piece);
         }
-
     }     
 }
    
@@ -80,6 +82,7 @@ window.addEventListener("keydown", function (event) {
 
 
 let emptyLine = lignVierg(tableau);
+console.log(emptyLine);
 // Lancement de la fonction principale 
 piece = randomPiece(tableau);
-principale(tableau,piece);
+principale(tableau,piece,emptyLine);
