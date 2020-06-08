@@ -62,7 +62,7 @@ function creationT(tableau){
 
 function randomPiece(tableau){
     // random entre 0 et nb de pièces diférentes
-    let r = Math.floor(Math.random() * 6);
+    let r = Math.floor(Math.random() * 7);
     // switch
     switch(r){
         case 0:

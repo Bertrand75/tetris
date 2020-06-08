@@ -45,6 +45,18 @@ function createArray(x,y) {
 
 }
 
+// creé une ligne vierge prete à etre insérée dans le tableau lorsqu'une ligne est effacée
+
+function lignVierg(tableau){
+    let lign = [1];
+     for (let m = 1; m<(tableau[0].length-1); m++){
+        lign.push(0);
+    }
+    lign.push(1);
+    console.log(lign);
+    return lign;
+}
+
 // affichage du tableau JS et de la pièce dans le tableau HTML
 
 function paintItWhite(tableauJSY,piece) {
