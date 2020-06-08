@@ -80,7 +80,7 @@ function rotationG(tableauJS,piece){
         let yOrigin = piece[p][1] - centreRotY; 
         let xRot = yOrigin;
         let yRot = - xOrigin;
-        if (tableauJS[xRot + centreRotX][yRot + centreRotY]!=0){
+        if (tableauJS[yRot + centreRotY][xRot + centreRotX]!=0){
             ouiNonNonOui=false;
         }
     }
