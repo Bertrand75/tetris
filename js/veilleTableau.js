@@ -1,7 +1,7 @@
 // si la plus haute pièce stoppée est en haut, le message "vous avez perdu" s'affiche
 function perdu(tableau){
     for (let i = 1; i<tableau[0].length - 1; i++){
-        if(tableau[5][i] != 0){
+        if(tableau[4][i] != 0){
             let perdu = document.getElementById('perdu');
             perdu.classList.remove("hidden");
             stopper[0]=1;
@@ -11,7 +11,7 @@ function perdu(tableau){
 }
 
 
-// la fonction qui suit a l'air de deconner un peu
+
 function delLigne(tableau){
      // pour chaque ligne du tableau
     let nb2zero = 0;
@@ -31,6 +31,8 @@ function delLigne(tableau){
             // on rajoute une ligne en haut
             tableau.unshift(emptyLine[0]);
             console.log(tableau);
+            score[0] += 1;
+            affichScore(score);
         }       
     }
     return tableau;
@@ -44,7 +46,7 @@ function affichScore(score){
 }
 
 
-// Partie Gilles (à compléter)
+// Partie Gilles (à compléter; ne fonctionne pas encore)
 function deleteLine1( tableauJS){
     let ymin = 2; // 1ere ligne visible du joueur
     let ymax = tableauJS.length - 2;  // derniere ligne visible du joueur

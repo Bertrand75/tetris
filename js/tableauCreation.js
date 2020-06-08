@@ -3,7 +3,7 @@ function createGrid(x,y) {
     let tableau = document.getElementById('tableau');
     for (let i=0; i<y; i++){
         let tr = document.createElement("tr");
-        if(i<=4 || i== y-1) {
+        if(i<=3 || i== y-1) {
             tr.hidden = true;
         }
         for (let j=0; j<x; j++){

@@ -1,4 +1,6 @@
-let tableau = createArray(10,15);
+let largTab = 15;
+let hautTab = 24;
+let tableau = createArray(largTab,hautTab);
 let couleur = ['white'];
 let score = [0];
 let stopper = [0]; // utile pour le perdu
@@ -34,15 +36,29 @@ function principale(tableau,piece){
 }
    
 
+
+function play() {
+    var audio = document.getElementById("audio");
+    if(audio.paused){
+        audio.play();
+    }
+    else{
+        audio.pause();
+    }
+    return audio;
+}
+
+
 // creation de la grille HTML
 
-createGrid(10,15);
+createGrid(largTab,hautTab);
 
 // designation des elements du DOM
 
 let gauche= document.getElementById('gauche');
 let droite= document.getElementById('droite');
 let routourne= document.getElementById('routourne');
+let zizic = document.getElementById('options');
 
 
 // activation des elements du DOM
@@ -80,9 +96,15 @@ window.addEventListener("keydown", function (event) {
     }
 }); 
 
+// pour lancer la musique
+
+zizic.addEventListener('click', function(){
+    play();
+});
+
 
 let emptyLine = lignVierg(tableau);
-console.log(emptyLine);
+
 // Lancement de la fonction principale 
 piece = randomPiece(tableau);
 principale(tableau,piece,emptyLine);

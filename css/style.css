@@ -86,8 +86,9 @@ a {
 h1 {
 	font-size:5rem;
 	text-align: center;
-	margin-top: 5rem;
+	margin-top: 3rem;
 	text-transform: uppercase;
+	color:red;
 }
 
 
@@ -98,20 +99,23 @@ h1 {
 
 #tableau {
 	border:0.5rem solid white;
-	margin: 4rem auto 0 auto;
+	margin: 2rem auto 0 auto;
 	text-align: center;
 }
-tr {
-	display:block;
-}
+
 td {
 	width:30px;
 	height:30px;
 	background-color:black;
 }
 
+#options{
+	width:40px;
+	position:relative;
+}
+
 #score {
-	width:472px;
+	width:455px;
 	display: block;
 	margin: 0 auto 3rem auto;
 	height:100px;
@@ -146,7 +150,7 @@ td {
 	display:none;
 }
 
-p {
+#commande p {
 	display:inline-block;
 	user-select:none;
 	text-align: center;
