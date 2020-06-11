@@ -2,7 +2,7 @@
 // création d'une piece au milieu haut de l'écran
 
 function creationO(tableau){
-    couleur[0] = 'green';    
+    couleur[0] = 'blue';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leO = [[posOrig, 0],[posOrig, 1],[posOrig+1, 0],[posOrig+1, 1]];
@@ -10,7 +10,7 @@ function creationO(tableau){
 }
 
 function creationL(tableau){
-    couleur[0] = 'blue';
+    couleur[0] = 'violet';
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leL = [[posOrig, 1],[posOrig, 0],[posOrig, 2],[posOrig+1, 2]];
@@ -26,7 +26,7 @@ function creationJ(tableau){
 }
 
 function creationI(tableau){
-    couleur[0] = 'cyan';    
+    couleur[0] = 'red';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leI = [[posOrig, 2],[posOrig, 0],[posOrig, 1],[posOrig, 3]];
@@ -34,7 +34,7 @@ function creationI(tableau){
 }
 
 function creationZ(tableau){
-    couleur[0] = 'gold';    
+    couleur[0] = 'orange';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leZ = [[posOrig, 0],[posOrig-1, 0],[posOrig, 1],[posOrig+1, 1]];
@@ -42,7 +42,7 @@ function creationZ(tableau){
 }
 
 function creationS(tableau){
-    couleur[0] = 'violet';    
+    couleur[0] = 'cyan';    
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leS = [[posOrig, 0],[posOrig+1, 0],[posOrig, 1],[posOrig-1, 1]];
@@ -50,7 +50,7 @@ function creationS(tableau){
 }
 
 function creationT(tableau){
-    couleur[0] = 'cornsilk';
+    couleur[0] = 'green';
     let largTab = tableau[0].length;
     let posOrig = Math.round(largTab/2 - 1);
     let leT = [[posOrig, 0],[posOrig-1, 0],[posOrig+1, 0],[posOrig, 1]];
@@ -88,19 +88,5 @@ function randomPiece(tableau){
             break;
 }
 	return piece;
-}
-
-    
-// Arrivée d'une pièce en haut de l'écran
-// fonction inutile compte tenu de la nouvelle stratégie
-
-function ajoutPieceHaut(piece, tableauJS){
-    // on parcourt chaque composant de la pièce et on récupère ses coordonnées
-    for (let i=0; i<piece.length; i++){
-        let posX = piece[i][0];
-        let posY = piece[i][1];
-        //on mofifie les valeurs dans le tableau JS aux endroits concernés
-        tableauJS[posX][posY] = 1;            
-        }
 }
 

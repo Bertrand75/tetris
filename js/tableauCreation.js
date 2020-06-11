@@ -2,12 +2,12 @@
 function createGrid(x,y) {
     let tableau = document.getElementById('tableau');
     for (let i=0; i<y; i++){
-        let tr = document.createElement("tr");
+        let tr = document.createElement("div");
         if(i<=3 || i== y-1) {
             tr.hidden = true;
         }
         for (let j=0; j<x; j++){
-            let td = document.createElement("td");
+            let td = document.createElement("div");
             td.setAttribute('id', i+"_"+j);         
             tr.append(td);
 
@@ -63,14 +63,16 @@ function paintItWhite(tableauJSY,piece) {
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
             td = document.getElementById(i+"_"+j);
-            if (tableauJSY[i][j]==1) {;
+            if (tableauJSY[i][j]==1) {
                 td.style.backgroundColor= "white";
             }
             else if(tableauJSY[i][j]!=0) {
                 td.style.backgroundColor= tableauJSY[i][j];
+            
             }
             else if(tableauJSY[i][j]==0) {
                 td.style.backgroundColor= "black";
+                td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
             }       
         }
     }
@@ -78,7 +80,21 @@ function paintItWhite(tableauJSY,piece) {
         posX = piece[z][0];
         posY = piece[z][1];
         td = document.getElementById((posY)+"_"+posX);
-        td.style.backgroundColor= couleur[0];
+        td.style.backgroundColor= couleur[0];     
+
+        // ajout des ombres (ça ne marche pas comme je voudrais pour l'instant)
+        if(piece.includes([posX,posY-1]) == false){
+            td.classList.add('shadUp');
+        }                   
+        if(piece.includes([posX+1,posY]) == false){
+            td.classList.add('shadRight');
+        }                  
+        if(piece.includes([posX-1,posY]) == false){
+            td.classList.add('shadLeft');
+        }                 
+        if(piece.includes([posX,posY+1]) == false){
+            td.classList.add('shadDown');
+        }                      
     }
 }
 
@@ -89,5 +105,6 @@ function paintItBlack(piece) {
         posY = piece[z][1];
         td = document.getElementById(posY+"_"+posX);
         td.style.backgroundColor= "black";
+        td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
     }
 }

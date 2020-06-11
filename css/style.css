@@ -86,7 +86,7 @@ a {
 h1 {
 	font-size:5rem;
 	text-align: center;
-	margin-top: 3rem;
+	margin: 3rem 0 2rem 0;
 	text-transform: uppercase;
 	color:red;
 }
@@ -99,11 +99,13 @@ h1 {
 
 #tableau {
 	border:0.5rem solid white;
-	margin: 2rem auto 0 auto;
+	width:460px;
 	text-align: center;
+	margin:0 auto;
 }
 
-td {
+div>div {
+	display:inline-block;
 	width:30px;
 	height:30px;
 	background-color:black;
@@ -112,10 +114,11 @@ td {
 #options{
 	width:40px;
 	position:relative;
+	cursor:pointer;
 }
 
 #score {
-	width:455px;
+	width:460px;
 	display: block;
 	margin: 0 auto 3rem auto;
 	height:100px;
@@ -158,6 +161,21 @@ td {
 	width:30%;
 	cursor:pointer; 
 }
+
+.shadUp {
+	border-top:solid 3px rgba(255,255,255,0.9);
+}
+.shadDown{
+	border-bottom:solid 3px rgba(0,0,0,0.5);
+}
+.shadLeft{
+	border-left:solid 3px rgba(255,255,255,0.9);
+}
+.shadRight{
+	border-right:solid 3px rgba(0,0,0,0.5);
+}
+
+
 
 
 
