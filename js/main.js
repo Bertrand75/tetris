@@ -9,14 +9,14 @@ let stopper = [0]; // utile pour le perdu
  
 
 // fonction qui gère le déplacement auto
-
+let vitesse = [500];
 function principale(tableau,piece){  
     // on vérifie que les cases du tableau situées sous la pièce sont libres
 
     let descendre = verifDessous(tableau, piece);
     if (descendre==true){
-        setTimeout(function(){unCranBas(tableau,piece);}, 500);
-        setTimeout(function(){principale(tableau,piece);}, 500);
+        setTimeout(function(){unCranBas(tableau,piece);}, vitesse[0]);
+        setTimeout(function(){principale(tableau,piece);}, vitesse[0]);
         }
     // si elle est bloquée, on intègre la pièce au tableau JS dans sa position actuelle
     else{
@@ -39,11 +39,17 @@ function principale(tableau,piece){
 
 function play() {
     var audio = document.getElementById("audio");
+    var onOff = document.getElementById("onOff");
+    var note = document.getElementById("options");
     if(audio.paused){
         audio.play();
+        onOff.innerText = "on";
+        note.setAttribute('src','images/music.png');
     }
     else{
         audio.pause();
+        onOff.innerText = "off";
+        note.setAttribute('src','images/musicoff.png');
     }
     return audio;
 }
@@ -78,11 +84,12 @@ routourne.addEventListener('click', function(){
 
 // controle au clavier
 
-window.addEventListener("keydown", function (event) {
+window.addEventListener("keyup", function (event) {
     event.preventDefault();
     switch (event.key) {
         case "ArrowDown":
             rotationD(tableau,piece);
+            vitesse[0] = 500;
         break;
         case "ArrowUp":
             rotationG(tableau,piece);
@@ -95,6 +102,13 @@ window.addEventListener("keydown", function (event) {
         break;
     }
 }); 
+
+
+window.addEventListener("keydown", function (event){
+    if (event.key == "ArrowDown"){
+        vitesse[0] = 50;
+    }
+});
 
 // pour lancer la musique
 

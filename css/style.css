@@ -115,6 +115,7 @@ div>div {
 	width:40px;
 	position:relative;
 	cursor:pointer;
+	margin-right: 1rem;
 }
 
 #score {
@@ -125,8 +126,8 @@ div>div {
 	color:black;
 	background-color:white;
 	font-size: 3rem;
-	text-align: center;
-	padding-top: 2rem;
+	text-align:left;
+	padding: 1rem 0 0 4rem;
 }
 #commande {
 	width:472px;

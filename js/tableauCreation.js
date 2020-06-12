@@ -77,24 +77,51 @@ function paintItWhite(tableauJSY,piece) {
         }
     }
     for (let z=0; z <piece.length; z++){
-        posX = piece[z][0];
-        posY = piece[z][1];
-        td = document.getElementById((posY)+"_"+posX);
+        let posX = piece[z][0];
+        let posY = piece[z][1];
+        td = document.getElementById(posY+"_"+posX);
         td.style.backgroundColor= couleur[0];     
 
-        // ajout des ombres (ça ne marche pas comme je voudrais pour l'instant)
-        if(piece.includes([posX,posY-1]) == false){
+        // ajout des ombres (ça fonctionne comme je le souhaitais mais c'est assez moche au final)
+        let sUp = true;
+        for (let i=0; i<piece.length;i++){
+            if(piece[i][0] == posX && piece[i][1] == posY-1){
+                sUp = false;
+            }                
+        }
+        if(sUp == true){
             td.classList.add('shadUp');
-        }                   
-        if(piece.includes([posX+1,posY]) == false){
-            td.classList.add('shadRight');
-        }                  
-        if(piece.includes([posX-1,posY]) == false){
-            td.classList.add('shadLeft');
-        }                 
-        if(piece.includes([posX,posY+1]) == false){
+        }
+
+        let sDown = true;
+        for (let i=0; i<piece.length;i++){
+            if(piece[i][0] == posX && piece[i][1] == posY+1){
+                sDown = false;
+            }                
+        }
+        if(sDown == true){
             td.classList.add('shadDown');
-        }                      
+        }
+
+        let sRight = true;
+        for (let i=0; i<piece.length;i++){
+            if(piece[i][0] == posX+1 && piece[i][1] == posY){
+                sRight = false;
+            }                
+        }
+        if(sRight == true){
+            td.classList.add('shadRight');
+        }
+                        
+        let sLeft = true;
+        for (let i=0; i<piece.length;i++){
+            if(piece[i][0] == posX-1 && piece[i][1] == posY){
+                sLeft = false;
+            }                
+        }
+        if(sLeft == true){
+            td.classList.add('shadLeft');
+        }                                  
     }
 }
 
