@@ -8,9 +8,8 @@ function createGrid(x,y) {
         }
         for (let j=0; j<x; j++){
             let td = document.createElement("div");
-            td.setAttribute('id', i+"_"+j);         
+            td.setAttribute('id', i+"_"+j);
             tr.append(td);
-
         }
         tableau.append(tr);
     }
@@ -18,7 +17,7 @@ function createGrid(x,y) {
 // création d'un tableau js de X * Y permettant de suivre l'évolution de la grille
 function createArray(x,y) {
     // création tableau X (remarque: on y place déjà un "1" qui correspondra à la colonne de gauche)
-    let tableauJSX = [1];
+    let tableauJSX = [[1,'couleur',0]];
     // création tableau Y; il regroupera l'ensemble des tableaux/lignes X
     let tableauJSY = [];
     // pour chaque ligne (sauf la dernière qui sera créée plus tard)
@@ -26,18 +25,18 @@ function createArray(x,y) {
         // on remplit chaque "colonne" de la ligne de "0" (cases inoccupées) 
         // remarque: j est < à x-2 pour laisser la place aux "1"(= cases occupées = les limites du cadre de jeu) que l'on a ajoutés et que l'on va ajouter
         for(let j=0;j<x-2;j++){
-            tableauJSX.push(0);
+            tableauJSX.push([0,'couleur',0]);
         }
         // on ajoute une case occupée à la fin de la ligne
-        tableauJSX.push(1);
+        tableauJSX.push([1,'couleur',0]);
         // quand la ligne est générée on l'ajoute à la suite (en dessous si l'on veut) des autres lignes
         tableauJSY.push(tableauJSX);
         // on vide (presque) la ligne pour pouvoir générer la suivante 
-        tableauJSX = [1];
+        tableauJSX = [[1,'couleur',0]];
     }
     // on remplit la dernière ligne de "1" pour indiquer la limite basse du cadre
     for(let l=0; l<x-1; l++) {
-        tableauJSX.push(1);
+        tableauJSX.push([1,'couleur',0]);
     }
     // on ajoute la dernière ligne de "1" à la suite des autres
     tableauJSY.push(tableauJSX); 
@@ -48,11 +47,11 @@ function createArray(x,y) {
 // creé une ligne vierge prete à etre insérée dans le tableau lorsqu'une ligne est effacée
 
 function lignVierg(tableau){
-    let lign = [[1]];
+    let lign = [[1,'couleur',0]];
      for (let m = 1; m<(tableau[0].length-1); m++){
-        lign[0].push(0);
+        lign.push([0,'couleur',0]);
     }
-    lign[0].push(1);
+    lign.push([1,'couleur',0]);
     return lign;
 }
 
@@ -63,14 +62,30 @@ function paintItWhite(tableauJSY,piece) {
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
             td = document.getElementById(i+"_"+j);
-            if (tableauJSY[i][j]==1) {
+            if (tableauJSY[i][j][0]==1) {
                 td.style.backgroundColor= "white";
             }
-            else if(tableauJSY[i][j]!=0) {
-                td.style.backgroundColor= tableauJSY[i][j];
+            else if(tableauJSY[i][j][0]!=0) {
+                td.style.backgroundColor= tableauJSY[i][j][1];
+                td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
+                // ajout des ombres
+                if (i>0){
+                    if (tableauJSY[i][j][2] != tableauJSY[i-1][j][2]){
+                        td.classList.add('shadUp');
+                    };
+                    if (tableauJSY[i][j][2] != tableauJSY[i+1][j][2]){
+                        td.classList.add('shadDown');
+                    };    
+                    if (tableauJSY[i][j][2] != tableauJSY[i][j-1][2]){
+                        td.classList.add('shadLeft');
+                    }; 
+                    if (tableauJSY[i][j][2] != tableauJSY[i][j+1][2]){
+                        td.classList.add('shadRight');
+                    };                                                         
+                }
             
             }
-            else if(tableauJSY[i][j]==0) {
+            else if(tableauJSY[i][j][0]==0) {
                 td.style.backgroundColor= "black";
                 td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
             }       
@@ -80,9 +95,9 @@ function paintItWhite(tableauJSY,piece) {
         let posX = piece[z][0];
         let posY = piece[z][1];
         td = document.getElementById(posY+"_"+posX);
-        td.style.backgroundColor= couleur[0];     
+        td.style.backgroundColor= couleur[0]; 
 
-        // ajout des ombres (ça fonctionne comme je le souhaitais mais c'est assez moche au final)
+        // ajout des ombres à la pièce en mouvement
         let sUp = true;
         for (let i=0; i<piece.length;i++){
             if(piece[i][0] == posX && piece[i][1] == posY-1){
@@ -132,6 +147,5 @@ function paintItBlack(piece) {
         posY = piece[z][1];
         td = document.getElementById(posY+"_"+posX);
         td.style.backgroundColor= "black";
-        td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
     }
 }

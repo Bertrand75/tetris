@@ -4,7 +4,7 @@ function goRight(tableauJS,piece){
     for (let i=0; i<piece.length; i++){
         let posX = piece[i][0];
         let posY = piece[i][1];
-        if (tableauJS[posY][posX+1] != 0){
+        if (tableauJS[posY][posX+1][0] != 0){
             ouiNonNonOui = false;
         };
     };
@@ -25,7 +25,7 @@ function goLeft(tableauJS,piece){
     for (let i=0; i<piece.length; i++){
         let posX = piece[i][0];
         let posY = piece[i][1];
-        if (tableauJS[posY][posX-1] != 0){
+        if (tableauJS[posY][posX-1][0] != 0){
             ouiNonNonOui = false;
         }
     };
@@ -51,7 +51,7 @@ function rotationD(tableauJS,piece){
         let yOrigin = piece[p][1] - centreRotY; 
         let xRot = - yOrigin;
         let yRot = xOrigin;
-        if (tableauJS[yRot + centreRotY][xRot + centreRotX]!=0){
+        if (tableauJS[yRot + centreRotY][xRot + centreRotX][0]!=0){
             ouiNonNonOui=false;
         }
     }
@@ -80,7 +80,7 @@ function rotationG(tableauJS,piece){
         let yOrigin = piece[p][1] - centreRotY; 
         let xRot = yOrigin;
         let yRot = - xOrigin;
-        if (tableauJS[yRot + centreRotY][xRot + centreRotX]!=0){
+        if (tableauJS[yRot + centreRotY][xRot + centreRotX][0]!=0){
             ouiNonNonOui=false;
         }
     }
@@ -109,7 +109,7 @@ function verifDessous(tableau, piece){
         let posX = piece[i][0];
         let posY = piece[i][1];
         // si les places du dessous sont occupées dans le tableau
-        if (tableau[posY+1][posX] != 0){
+        if (tableau[posY+1][posX][0] != 0){
             // la piece n'est pas libre de se déplacer
             libre = false;
         }
@@ -120,13 +120,16 @@ function verifDessous(tableau, piece){
 
 // déplacement de la pièce d'un cran vers le bas
 
-function unCranBas(tableau,piece){
-    // on enlève la pièce de l'affichage
-    paintItBlack(piece);
-    // on incrémente y de 1 afin de déplacer la pièce en dessous
-    for (let i=0; i<piece.length; i++){        
-        piece[i][1] += 1;
-    };
-    // on reaffiche la pièce à la bonne position
-    paintItWhite(tableau,piece);
+function unCranBas(tableau,piece){   
+    let libre = verifDessous(tableau, piece);
+    if (libre==true){
+        // on enlève la pièce de l'affichage
+        paintItBlack(piece);
+        // on incrémente y de 1 afin de déplacer la pièce en dessous
+        for (let i=0; i<piece.length; i++){        
+            piece[i][1] += 1;
+        };
+        // on reaffiche la pièce à la bonne position
+        paintItWhite(tableau,piece);
+    }
 }

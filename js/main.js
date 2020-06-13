@@ -1,13 +1,12 @@
 let largTab = 15;
 let hautTab = 24;
 let tableau = createArray(largTab,hautTab);
-let couleur = ['white'];
+let couleur = ['white', 0];
 let score = [0];
 let stopper = [0]; // utile pour le perdu
 
 
  
-
 // fonction qui gère le déplacement auto
 let vitesse = [500];
 function principale(tableau,piece){  
@@ -23,7 +22,9 @@ function principale(tableau,piece){
         for (let n=0; n<piece.length;n++){
             let posX = piece[n][0];
             let posY = piece[n][1];
-            tableau[posY][posX] = couleur[0]; // la couleur[0] est le tableau dans lequel est stockée la couleur de la pièce en cours       
+            tableau[posY][posX][0] = 2;
+            tableau[posY][posX][1] = couleur[0]; // couleur[0] est la couleur de la pièce en cours  
+            tableau[posY][posX][2] = couleur[1]; // couleur[1] identifiant de la pièce
         }
         paintItWhite(tableau,piece); 
         piece = randomPiece(tableau);   
@@ -36,28 +37,10 @@ function principale(tableau,piece){
 }
    
 
-
-function play() {
-    var audio = document.getElementById("audio");
-    var onOff = document.getElementById("onOff");
-    var note = document.getElementById("options");
-    if(audio.paused){
-        audio.play();
-        onOff.innerText = "on";
-        note.setAttribute('src','images/music.png');
-    }
-    else{
-        audio.pause();
-        onOff.innerText = "off";
-        note.setAttribute('src','images/musicoff.png');
-    }
-    return audio;
-}
-
-
 // creation de la grille HTML
 
 createGrid(largTab,hautTab);
+
 
 // designation des elements du DOM
 
@@ -81,34 +64,30 @@ routourne.addEventListener('click', function(){
     rotationD(tableau,piece);
 });
 
-
+// la variable toucheDispo sert à modifier le comportement de la flèche du bas
+let toucheDispo = true;
 // controle au clavier
 
 window.addEventListener("keyup", function (event) {
     event.preventDefault();
-    switch (event.key) {
-        case "ArrowDown":
-            rotationD(tableau,piece);
-            vitesse[0] = 500;
-        break;
-        case "ArrowUp":
+    if (event.key == "ArrowUp") {
             rotationG(tableau,piece);
-        break;
-        case "ArrowLeft":
-            goLeft(tableau,piece);
-        break;
-        case "ArrowRight":
-            goRight(tableau,piece);
-        break;
     }
 }); 
 
 
 window.addEventListener("keydown", function (event){
     if (event.key == "ArrowDown"){
-        vitesse[0] = 50;
+        unCranBas(tableau,piece);
+    }
+    else if (event.key == "ArrowLeft"){
+        goLeft(tableau,piece);
+    }
+    else if (event.key == "ArrowRight"){
+        goRight(tableau,piece);
     }
 });
+
 
 // pour lancer la musique
 
@@ -121,4 +100,4 @@ let emptyLine = lignVierg(tableau);
 
 // Lancement de la fonction principale 
 piece = randomPiece(tableau);
-principale(tableau,piece,emptyLine);
+principale(tableau,piece);
