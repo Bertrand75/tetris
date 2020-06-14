@@ -4,14 +4,14 @@ let tableau = createArray(largTab,hautTab);
 let couleur = ['white', 0];
 let score = [0];
 let stopper = [0]; // utile pour le perdu
-
+let prochaine = [];
+let vitesse = [500];
 
  
+
 // fonction qui gère le déplacement auto
-let vitesse = [500];
 function principale(tableau,piece){  
     // on vérifie que les cases du tableau situées sous la pièce sont libres
-
     let descendre = verifDessous(tableau, piece);
     if (descendre==true){
         setTimeout(function(){unCranBas(tableau,piece);}, vitesse[0]);
@@ -26,10 +26,21 @@ function principale(tableau,piece){
             tableau[posY][posX][1] = couleur[0]; // couleur[0] est la couleur de la pièce en cours  
             tableau[posY][posX][2] = couleur[1]; // couleur[1] identifiant de la pièce
         }
+        // on actualise l'affichage
         paintItWhite(tableau,piece); 
-        piece = randomPiece(tableau);   
+
+        // on supprime les lignes pleines s'il y en a
         tableau = delLigne(tableau); 
-        perdu(tableau);       
+
+        // on regarde si le jeu peut se poursuivre ou si le message perdu doit s'afficher
+        perdu(tableau);    
+
+        // on renvoie la piece suivante
+        let r = prochaine[0];
+        nextPieceEmpty();
+        nextPiece();
+        piece = placePiece(tableau,r);         
+
         if(stopper==0){
             principale(tableau,piece);
         }
@@ -98,6 +109,10 @@ zizic.addEventListener('click', function(){
 
 let emptyLine = lignVierg(tableau);
 
+
+
 // Lancement de la fonction principale 
-piece = randomPiece(tableau);
+let r = randomPiece(7);
+nextPiece();
+piece = placePiece(tableau,r); 
 principale(tableau,piece);

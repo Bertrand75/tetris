@@ -66,11 +66,14 @@ function creationT(tableau){
 
 
 // choix aléatoire d'une piece
+// random entre 0 et nb de pièces diférentes
+function randomPiece(nbPiece){
 
-function randomPiece(tableau){
-    // random entre 0 et nb de pièces diférentes
-    let r = Math.floor(Math.random() * 7);
-    // switch
+    let r = Math.floor(Math.random() * nbPiece);
+    return r;
+}
+
+function placePiece(tableau,r){    
     switch(r){
         case 0:
             piece =	creationO(tableau);
@@ -93,7 +96,55 @@ function randomPiece(tableau){
         case 6:
             piece =	creationT(tableau);
             break;
-}
+    }
 	return piece;
+}
+
+
+// affichage prochaine pièce  
+
+function nextPiece(){
+    // creation cadre HTML
+    let cadreH = document.getElementById('piece');    
+    for(let i=0; i<7;i++){
+        let tr = document.createElement("div");
+        for (let j=0; j<5; j++){
+            let td = document.createElement("div");
+            td.setAttribute('id', (i+10000)+"_"+(j+10000)); // on modifie les id pour ne pas les confondre avec ceux du tableau principal
+            tr.append(td);
+        }
+        cadreH.append(tr);
+    }
+
+    // creation cadre JS  
+    let cadreJS = new Array(7);
+    for (let j=0; j<7; j++){
+        cadreJS[j] = new Array(5);
+    }
+    let ran = randomPiece(7);
+    prochaine[0] = ran;
+    let nextP = placePiece(cadreJS,ran); 
+
+    // remplissage cadre JS
+    for (let i=0; i<nextP.length; i++){
+        let posX = nextP[i][0];
+        let posY = nextP[i][1];
+        cadreJS[posY][posX] = 2;
+    }
+
+    // remplissage cadre HTML
+    for (let i=0; i<cadreJS.length; i++){
+        for (let j=0; j<cadreJS[0].length; j++){
+            if(cadreJS[i][j] == 2){
+                let cadreHCase = document.getElementById((i+10002)+"_"+(j+10001));
+                cadreHCase.style.backgroundColor = couleur[0];
+            }
+        }
+    }
+}
+
+function nextPieceEmpty(){
+    let cadreH = document.getElementById('piece'); 
+    cadreH.innerHTML = '';
 }
 
