@@ -68,10 +68,10 @@ function creationT(tableau){
 // choix aléatoire d'une piece
 // random entre 0 et nb de pièces diférentes
 function randomPiece(nbPiece){
-
     let r = Math.floor(Math.random() * nbPiece);
     return r;
 }
+
 
 function placePiece(tableau,r){    
     switch(r){

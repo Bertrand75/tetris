@@ -10,27 +10,27 @@ function perdu(tableau){
     }
 }
 
-
-
 function delLigne(tableau){
-     // pour chaque ligne du tableau
-    let nb2zero = 0;
+     // pour chaque ligne du tableau (sauf la dernière)
+    
     for (let l = 0; l<tableau.length-1; l++){
-        nb2zero = 0;
+	let nb2zero = 0;
         // s'il y a 0 dedans
         for (let i = 0; i<tableau[0].length; i++){
             if(tableau[l][i][0] == 0){
                 // c'est que la ligne est incomplete
                 nb2zero += 1;
+		console.log(nb2zero);
             }
         }
+        // S'il n'y a pas de "0" dedans c'est qu'elle est complète
         if(nb2zero == 0){
             // on supprime la ligne
             tableau.splice(l,1);
             // on rajoute une ligne en haut
-            tableau.unshift(emptyLine);
+            tableau.unshift(ligne(tableau[0].length,0));
             score[0] += 1;
-            affichScore(score);
+            affichScore(score,cadre);
         }
     }
     return tableau;
@@ -38,9 +38,8 @@ function delLigne(tableau){
 
 
 // affichage du score
-function affichScore(score){
-    let cadre = document.getElementById('chiffre');
-    cadre.innerHTML = score.toString().padStart(4, '0');
+function affichScore(score,cadre){
+    cadre.innerHTML = score.toString().padStart(4,'0');
 }
 
 

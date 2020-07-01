@@ -1,8 +1,12 @@
-// création d'un tableau dans le dom de X * Y
+
+// TABLEAU HTML
+
+// création d'un tableau (dans le dom = partier visible à l'écran) de dimension X * Y
 function createGrid(x,y) {
     let tableau = document.getElementById('tableau');
     for (let i=0; i<y; i++){
         let tr = document.createElement("div");
+        // les 3 premières lignes sont cachées pour que la pièce puisse apparaitre progressivement
         if(i<=3 || i== y-1) {
             tr.hidden = true;
         }
@@ -14,46 +18,37 @@ function createGrid(x,y) {
         tableau.append(tr);
     }
 }
-// création d'un tableau js de X * Y permettant de suivre l'évolution de la grille
-function createArray(x,y) {
-    // création tableau X (remarque: on y place déjà un "1" qui correspondra à la colonne de gauche)
-    let tableauJSX = [[1,'couleur',0]];
-    // création tableau Y; il regroupera l'ensemble des tableaux/lignes X
-    let tableauJSY = [];
-    // pour chaque ligne (sauf la dernière qui sera créée plus tard)
-    for(let i=0;i<y-1;i++){
-        // on remplit chaque "colonne" de la ligne de "0" (cases inoccupées) 
-        // remarque: j est < à x-2 pour laisser la place aux "1"(= cases occupées = les limites du cadre de jeu) que l'on a ajoutés et que l'on va ajouter
-        for(let j=0;j<x-2;j++){
-            tableauJSX.push([0,'couleur',0]);
-        }
-        // on ajoute une case occupée à la fin de la ligne
-        tableauJSX.push([1,'couleur',0]);
-        // quand la ligne est générée on l'ajoute à la suite (en dessous si l'on veut) des autres lignes
-        tableauJSY.push(tableauJSX);
-        // on vide (presque) la ligne pour pouvoir générer la suivante 
-        tableauJSX = [[1,'couleur',0]];
-    }
-    // on remplit la dernière ligne de "1" pour indiquer la limite basse du cadre
-    for(let l=0; l<x-1; l++) {
-        tableauJSX.push([1,'couleur',0]);
-    }
-    // on ajoute la dernière ligne de "1" à la suite des autres
-    tableauJSY.push(tableauJSX); 
-    return tableauJSY;
 
-}
 
-// creé une ligne vierge prete à etre insérée dans le tableau lorsqu'une ligne est effacée
 
-function lignVierg(tableau){
+// TABLEAU JAVASCRIPT
+
+
+// création d'une ligne
+
+function ligne(largeurTableau,contenu){
     let lign = [[1,'couleur',0]];
-     for (let m = 1; m<(tableau[0].length-1); m++){
-        lign.push([0,'couleur',0]);
+     for (let m = 1; m<(largeurTableau-1); m++){
+        lign.push([contenu,'couleur',0]);
     }
     lign.push([1,'couleur',0]);
     return lign;
 }
+
+
+// création d'un tableau JS de X * Y pour effectuer les calculs
+function createArray(x,y) {
+    let tableauJS = [];
+    // on ajoute y-1 lignes de "0"
+    for(let i=0;i<y-1;i++){
+        tableauJS.push(ligne(x,0));  
+    }
+    // on remplit la dernière ligne de "1" pour indiquer la limite basse du cadre
+    tableauJS.push(ligne(x,1));
+    return tableauJS;
+}
+
+
 
 // affichage du tableau JS et de la pièce dans le tableau HTML
 
@@ -62,12 +57,12 @@ function paintItWhite(tableauJSY,piece) {
     for (let i=0; i<tableauJSY.length; i++){
         for (let j=0; j<tableauJSY[0].length; j++){
             td = document.getElementById(i+"_"+j);
+            td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
             if (tableauJSY[i][j][0]==1) {
                 td.style.backgroundColor= "white";
             }
             else if(tableauJSY[i][j][0]!=0) {
                 td.style.backgroundColor= tableauJSY[i][j][1];
-                td.classList.remove('shadUp','shadDown','shadRight','shadLeft');
                 // ajout des ombres
                 if (i>0){
                     if (tableauJSY[i][j][2] != tableauJSY[i-1][j][2]){
@@ -91,9 +86,9 @@ function paintItWhite(tableauJSY,piece) {
             }       
         }
     }
-    for (let z=0; z <piece.length; z++){
-        let posX = piece[z][0];
-        let posY = piece[z][1];
+    for (let k=0; k <piece.length; k++){
+        let posX = piece[k][0];
+        let posY = piece[k][1];
         td = document.getElementById(posY+"_"+posX);
         td.style.backgroundColor= couleur[0]; 
 
@@ -102,9 +97,9 @@ function paintItWhite(tableauJSY,piece) {
         // exemple pour les ombres au dessus
         let sUp = true;
         // pour toutes les parties de la pièce
-        for (let i=0; i<piece.length;i++){
+        for (let l=0; l<piece.length;l++){
             // si il y a un composant situé juste au dessus
-            if(piece[i][0] == posX && piece[i][1] == posY-1){
+            if(piece[l][0] == posX && piece[l][1] == posY-1){
                 // on ne mettra pas d'ombre à ce niveau là
                 sUp = false;
             }                
@@ -114,8 +109,8 @@ function paintItWhite(tableauJSY,piece) {
         }
 
         let sDown = true;
-        for (let i=0; i<piece.length;i++){
-            if(piece[i][0] == posX && piece[i][1] == posY+1){
+        for (let m=0; m<piece.length;m++){
+            if(piece[m][0] == posX && piece[m][1] == posY+1){
                 sDown = false;
             }                
         }
@@ -124,8 +119,8 @@ function paintItWhite(tableauJSY,piece) {
         }
 
         let sRight = true;
-        for (let i=0; i<piece.length;i++){
-            if(piece[i][0] == posX+1 && piece[i][1] == posY){
+        for (let n=0; n<piece.length;n++){
+            if(piece[n][0] == posX+1 && piece[n][1] == posY){
                 sRight = false;
             }                
         }
@@ -134,8 +129,8 @@ function paintItWhite(tableauJSY,piece) {
         }
                         
         let sLeft = true;
-        for (let i=0; i<piece.length;i++){
-            if(piece[i][0] == posX-1 && piece[i][1] == posY){
+        for (let o=0; o<piece.length;o++){
+            if(piece[o][0] == posX-1 && piece[o][1] == posY){
                 sLeft = false;
             }                
         }
@@ -148,9 +143,22 @@ function paintItWhite(tableauJSY,piece) {
 // effacement de la piece à l'écran
 function paintItBlack(piece) {
     for (let z=0; z <piece.length; z++){
-        posX = piece[z][0];
-        posY = piece[z][1];
-        td = document.getElementById(posY+"_"+posX);
+        let posX = piece[z][0];
+        let posY = piece[z][1];
+        let td = document.getElementById(posY+"_"+posX);
         td.style.backgroundColor= "black";
+    }
+}
+
+
+// integration de la piece dans le tableau
+
+function integrerPiece(tableauJS, piece){
+    for (let n=0; n<piece.length;n++){
+        let posX = piece[n][0];
+        let posY = piece[n][1];
+        tableauJS[posY][posX][0] = 2;
+        tableauJS[posY][posX][1] = couleur[0]; // couleur[0] est la couleur de la pièce en cours  
+        tableauJS[posY][posX][2] = couleur[1]; // couleur[1] identifiant de la pièce
     }
 }
