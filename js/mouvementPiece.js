@@ -41,45 +41,48 @@ function deplacement (tableauJS, piece, cote){
 
 
 function rotation(tableauJS, piece, cote){
-    let libre=true;
-    let centreRotX = piece[0][0];
-    let centreRotY = piece[0][1];
-    let facteurY;
-    let facteurX;
+    // si la piece n'est pas un carré dont la couleur est bleu; les rotations sur les carrés ne servant à rien et étant même problématiques
+    if(couleur[0] != 'blue'){
+        let libre=true;
+        let centreRotX = piece[0][0];
+        let centreRotY = piece[0][1];
+        let facteurY;
+        let facteurX;
 
-    // en fonction du sens de rotation le calcul des coordonnées  varie
-    if (cote=="droite"){
-        facteurY = -1;
-        facteurX = 1;
-    }
-    else {
-        facteurY = 1;
-        facteurX = -1;                      
+        // en fonction du sens de rotation le calcul des coordonnées  varie
+        if (cote=="droite"){
+            facteurY = -1;
+            facteurX = 1;
         }
+        else {
+            facteurY = 1;
+            facteurX = -1;                      
+            }
 
-    // on vérifie que les cases occupées potentiellement par la pièce après une rotation (éventuelle) sont disponibles dans le tableau
-    for (let p=0; p<piece.length;p++){
-        let xOrigin = piece[p][0] - centreRotX;
-        let yOrigin = piece[p][1] - centreRotY; 
-        let xRot = facteurY * yOrigin;
-        let yRot = facteurX * xOrigin;
-        if (tableauJS[yRot + centreRotY][xRot + centreRotX][0]!=0){
-            libre=false;
-        }
-    }
-    // si c'est le cas on effectue la rotation
-    if (libre==true){
-        paintItBlack(piece);
+        // on vérifie que les cases occupées potentiellement par la pièce après une rotation (éventuelle) sont disponibles dans le tableau
         for (let p=0; p<piece.length;p++){
             let xOrigin = piece[p][0] - centreRotX;
             let yOrigin = piece[p][1] - centreRotY; 
             let xRot = facteurY * yOrigin;
             let yRot = facteurX * xOrigin;
-            piece[p][0] = xRot + centreRotX;
-            piece[p][1] = yRot + centreRotY;
+            if (tableauJS[yRot + centreRotY][xRot + centreRotX][0]!=0){
+                libre=false;
+            }
         }
-        paintItWhite(tableauJS,piece);
-    }                
+        // si c'est le cas on effectue la rotation
+        if (libre==true){
+            paintItBlack(piece);
+            for (let p=0; p<piece.length;p++){
+                let xOrigin = piece[p][0] - centreRotX;
+                let yOrigin = piece[p][1] - centreRotY; 
+                let xRot = facteurY * yOrigin;
+                let yRot = facteurX * xOrigin;
+                piece[p][0] = xRot + centreRotX;
+                piece[p][1] = yRot + centreRotY;
+            }
+            paintItWhite(tableauJS,piece);
+        }   
+    }             
 }
 
 // verification que la place est libre pour descendre

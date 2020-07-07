@@ -93,12 +93,11 @@ function paintItWhite(tableauJSY,piece) {
         td.style.backgroundColor= couleur[0]; 
 
         // ajout des ombres à la pièce en mouvement
-
         // exemple pour les ombres au dessus
         let sUp = true;
         // pour toutes les parties de la pièce
         for (let l=0; l<piece.length;l++){
-            // si il y a un composant situé juste au dessus
+            // si il y a une autre partie de la piece au dessus
             if(piece[l][0] == posX && piece[l][1] == posY-1){
                 // on ne mettra pas d'ombre à ce niveau là
                 sUp = false;

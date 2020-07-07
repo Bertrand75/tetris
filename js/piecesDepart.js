@@ -103,18 +103,7 @@ function placePiece(tableau,r){
 
 // affichage prochaine pièce  
 
-function nextPiece(){
-    // creation cadre HTML
-    let cadreH = document.getElementById('piece');    
-    for(let i=0; i<7;i++){
-        let tr = document.createElement("div");
-        for (let j=0; j<5; j++){
-            let td = document.createElement("div");
-            td.setAttribute('id', (i+10000)+"_"+(j+10000)); // on modifie les id pour ne pas les confondre avec ceux du tableau principal
-            tr.append(td);
-        }
-        cadreH.append(tr);
-    }
+function nextPieceJS(){
 
     // creation cadre JS  
     let cadreJS = new Array(7);
@@ -129,19 +118,47 @@ function nextPiece(){
     for (let i=0; i<nextP.length; i++){
         let posX = nextP[i][0];
         let posY = nextP[i][1];
-        cadreJS[posY][posX] = 2;
+        cadreJS[posY+2][posX+1] = couleur[0];
     }
+    return cadreJS;
+}
 
+function nextPieceHTML(cadreJS){
+    // creation cadre HTML
+    let cadreH = document.getElementById('piece');    
+    for(let i=0; i<7;i++){
+        let tr = document.createElement("div");
+        for (let j=0; j<5; j++){
+            let td = document.createElement("div");
+            td.setAttribute('id', (i+10000)+"_"+(j+10000)); // on modifie les id pour ne pas les confondre avec ceux du tableau principal
+            tr.append(td);
+        }
+        cadreH.append(tr);
+    }    
     // remplissage cadre HTML
     for (let i=0; i<cadreJS.length; i++){
         for (let j=0; j<cadreJS[0].length; j++){
-            if(cadreJS[i][j] == 2){
-                let cadreHCase = document.getElementById((i+10002)+"_"+(j+10001));
-                cadreHCase.style.backgroundColor = couleur[0];
+            if(typeof cadreJS[i][j] === "string"){
+                let cadreHCase = document.getElementById((i+10000)+"_"+(j+10000));
+                cadreHCase.style.backgroundColor = cadreJS[i][j];
+                // ajout des ombres
+                if (cadreJS[i][j] != cadreJS[i-1][j]){
+                    cadreHCase.classList.add('shadUp');
+                }
+                if (cadreJS[i][j] != cadreJS[i+1][j]){
+                    cadreHCase.classList.add('shadDown');
+                }  
+                if (cadreJS[i][j] != cadreJS[i][j-1]){
+                    cadreHCase.classList.add('shadLeft');
+                } 
+                if (cadreJS[i][j] != cadreJS[i][j+1]){
+                    cadreHCase.classList.add('shadRight');
+                }                  
             }
         }
     }
 }
+
 
 function nextPieceEmpty(){
     let cadreH = document.getElementById('piece'); 

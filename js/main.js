@@ -3,9 +3,11 @@ let hautTab = 24;
 let tableau = createArray(largTab,hautTab);
 let couleur = ['white', 0];
 let score = [0];
+let level = [0];
 let stopper = [0]; // utile pour le perdu
-let prochaine = [];
-let vitesse = 500;
+let prochaine = []; // permet de mémoriser la prochaine pièce à arriver
+let vitesse = [500];
+let compteur = [0]; // utile pour retarder l'affichage de la prochaine piece
  
 
 // fonction qui gère le déplacement auto
@@ -22,12 +24,17 @@ function principale(tableau,piece){
         tableau = delLigne(tableau); 
         // on renvoie la piece suivante
         let r = prochaine[0];
-        nextPieceEmpty();
-        nextPiece();
+        cadreJS = nextPieceJS();
+        compteur[0]=0;
         piece = placePiece(tableau,r);      
         }
     else{
         deplacement(tableau,piece,"bas");
+        if (compteur[0]==2){
+            nextPieceEmpty();
+            nextPieceHTML(cadreJS);
+        }
+        compteur[0]++;
     }
     // on regarde si le jeu peut se poursuivre ou si le message perdu doit s'afficher
     perdu(tableau);    
@@ -45,6 +52,7 @@ let droite= document.getElementById('droite');
 let routourne= document.getElementById('routourne');
 let zizic = document.getElementById('options');
 let cadre = document.getElementById('chiffre');
+let cadreNiv = document.getElementById('niveau');
 
 // activation des elements du DOM
 // controle au clic
@@ -90,11 +98,26 @@ zizic.addEventListener('click', function(){
 
 // Lancement de la fonction principale 
 let r = randomPiece(7);
-nextPiece();
+let cadreJS = nextPieceJS();
 piece = placePiece(tableau,r); 
-let mouvementPerpet = setInterval(function(){
-    principale(tableau,piece);
-    if(stopper!=0){
-        clearInterval(mouvementPerpet);
-    }
-}, vitesse);
+
+
+
+function perpert(levelDepart){
+    let variableStop = setInterval(function(){
+        principale(tableau,piece);
+        if(stopper!=0){
+            clearInterval(variableStop);
+        }
+        else if (level[0]>levelDepart && vitesse[0]>=100){
+            clearInterval(variableStop);
+            vitesse[0] -= 50;
+            console.log('vitesse ='+vitesse[0]);
+            levelDepart++;
+            perpert(levelDepart);
+        }
+        console.log('niveau = '+level[0]);
+    }, vitesse[0]);
+}
+let levelDepart = 0;
+perpert(levelDepart);

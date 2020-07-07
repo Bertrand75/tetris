@@ -20,7 +20,6 @@ function delLigne(tableau){
             if(tableau[l][i][0] == 0){
                 // c'est que la ligne est incomplete
                 nb2zero += 1;
-		console.log(nb2zero);
             }
         }
         // S'il n'y a pas de "0" dedans c'est qu'elle est complète
@@ -31,15 +30,22 @@ function delLigne(tableau){
             tableau.unshift(ligne(tableau[0].length,0));
             score[0] += 1;
             affichScore(score,cadre);
+            affichNiv(score,cadreNiv);            
         }
     }
     return tableau;
 }
 
 
-// affichage du score
+// affichage du score et du niveau
 function affichScore(score,cadre){
-    cadre.innerHTML = score.toString().padStart(4,'0');
+    cadre.innerHTML = score[0].toString().padStart(4,'0');
+}
+
+function affichNiv(score,cadreNiv){
+    let niveau = Math.floor(score[0]/5);
+    cadreNiv.innerHTML = niveau.toString().padStart(2,'0');
+    level[0] = niveau; 
 }
 
 

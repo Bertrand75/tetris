@@ -127,7 +127,7 @@ div>div {
 	width:460px;
 	display: block;
 	margin: 0 auto 3rem auto;
-	height:100px;
+	height:110px;
 	color:black;
 	background-color:white;
 	font-size: 3rem;
@@ -175,16 +175,16 @@ div>div {
 }
 
 .shadUp {
-	border-top:solid 3px rgba(255,255,255,0.9);
+	border-top:solid 4px rgba(255,255,255,0.9);
 }
 .shadDown{
-	border-bottom:solid 3px rgba(0,0,0,0.5);
+	border-bottom:solid 4px rgba(0,0,0,0.5);
 }
 .shadLeft{
-	border-left:solid 3px rgba(255,255,255,0.9);
+	border-left:solid 4px rgba(255,255,255,0.9);
 }
 .shadRight{
-	border-right:solid 3px rgba(0,0,0,0.5);
+	border-right:solid 4px rgba(0,0,0,0.5);
 }
 
 #cadrePiece {
